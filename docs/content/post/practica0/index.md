@@ -1,10 +1,15 @@
 +++
 date = '2025-02-21T08:43:33-08:00'
 draft = false
-title = 'Practica 0'
+title = 'Práctica 0'
 +++
 
 <!-- comentario -->
+
+<!-- subtítulo -->
+# PRIMERA SESIÓN:
+
+En esta sesión se nos dió una pequeña introducción a markdown.
 
 <!-- encabezados -->
 # Encabezado 1
@@ -61,7 +66,7 @@ printf("hola");
 ```
 
 ```javascript
-console.log("HOLA MUNDO";
+console.log("HOLA MUNDO");
 const test = ()
 ```
 
@@ -85,7 +90,14 @@ const test = ()
 <!-- menciones-->
 @carrerasdecar :+1: :smile:
 
+# SEGUNDA Y TERCERA SESIÓN:
 
+![PerfilGitHub](images/perfil_github.png)
+
+
+En la segunda y tercera sesión vimos una introducción a Git y GitHub, además de crear sitios web estáticos con ayuda de HUGO y GitHub Pages. En esta imágen se puede ver cómo, con los conocimientos aprendidos en el laboratorio cree mi repositorio llamado "Portafolio_Paradigmas" en mi perfil de GitHub, en este se encuetra todo lo relacionado con el sitio web, además se encuentra una carpeta donde se organiza el contenido de las prácticas realizadas.
+
+[Mi Respositorio](https://github.com/Jesus292005/Portafolio_Paradigmas.git "REPOSITORIO GOD")
 
 
 
