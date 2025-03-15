@@ -4,7 +4,7 @@ draft = false
 title = 'Práctica 1'
 +++
 
-## En esta página se hará un análisis de un programa sobre una biblioteca
+## En esta página se analizará el software de una biblioteca además de otros dos códigos sobre el manejo de la memoria.
 
 ### memory_management.h
 
@@ -15,7 +15,6 @@ title = 'Práctica 1'
 
 #include <stdio.h>
 
-// Define a macro to enable or disable memory management display
 #ifndef MEMORY_MANAGEMENT_DISPLAY
 #define MEMORY_MANAGEMENT_DISPLAY 0
 #endif
@@ -24,7 +23,6 @@ Las instrucciones #ifndef, #define se usan para que no se escriba más de una ve
 
 
 ```c
-// Counters for memory usage
 extern int heap_allocations;
 extern int heap_deallocations;
 extern int stack_allocations;
@@ -163,10 +161,9 @@ void displayMemoryUsage() {
 Esta funcion agrega un nuevo libro a la biblioteca, asigna la memoria y actualiza el contador de libros.
 ````c
 void addBook(book_t **library, int* count) {
-    book_t *new_book = (book_t *)malloc(sizeof(book_t)); // Asignación en el heap
-    incrementHeapAllocations(new_book, sizeof(book_t));   // Registra la asignación
-    // Lógica para ingresar datos del libro...
-    new_book->next = *library; // Agrega el libro al inicio de la lista
+    book_t *new_book = (book_t *)malloc(sizeof(book_t));
+    incrementHeapAllocations(new_book, sizeof(book_t));
+    new_book->next = *library;
     *library = new_book;
     (*count)++;
 }
@@ -177,10 +174,10 @@ Esta funcion lo que hace es buscar un libro en la librería por su identificador
 book_t* findBookById(book_t *library, int bookID) {
     book_t *current = library;
     while (current) {
-        if (current->id == bookID) return current; // Retorna el libro si lo encuentra
+        if (current->id == bookID) return current;
         current = current->next;
     }
-    return NULL; // Retorna NULL si no lo encuentra
+    return NULL;
 }
 ````
 
@@ -189,22 +186,21 @@ Gracias a estas funciones podemos acceder a los libros que tenemos disponibles e
 void displayBooksRecursive(book_t *library) {
     if (!library) return;
     printf("\nID libro: %d\nTitulo: %s\nAutor: %s\n...", library->id, library->title, library->author);
-    displayBooksRecursive(library->next); // Llamada recursiva
+    displayBooksRecursive(library->next);
 }
 
 void displayBooks(book_t *library) {
     if (!library) printf("\nNo hay libros disponibles.\n");
-    else displayBooksRecursive(library); // Inicia la recursión
+    else displayBooksRecursive(library);
 }
 ````
 
 Esta funcion nos permite agregar un nuevo miembro a la lista de miembros.
 ````c
 void addMember(member_t **members, int *memberCount) {
-    member_t *new_member = (member_t *)malloc(sizeof(member_t)); // Asignación en el heap
-    incrementHeapAllocations(new_member, sizeof(member_t));      // Registra la asignación
-    // Lógica para ingresar datos del miembro...
-    new_member->next = *members; // Agrega el miembro al inicio de la lista
+    member_t *new_member = (member_t *)malloc(sizeof(member_t));
+    incrementHeapAllocations(new_member, sizeof(member_t));
+    new_member->next = *members;
     *members = new_member;
     (*memberCount)++;
 }
@@ -213,13 +209,12 @@ void addMember(member_t **members, int *memberCount) {
 Esta funcion nos permite prestar un libro disponible a un miembro activo, se disminuye la cantidad disponible de ese libro y se actualiza la lista de libros prestados a este miembro.
 ````c
 void issueBook(book_t *library, member_t *members) {
-    // Busca el libro y el miembro...
     if (bookFound && memberFound) {
-        bookFound->quantity--; // Disminuye la cantidad del libro
+        bookFound->quantity--;
         memberFound->issued_count++;
-        memberFound->issued_books = realloc(memberFound->issued_books, memberFound->issued_count * sizeof(int)); // Reasigna memoria
-        incrementHeapAllocations(memberFound->issued_books, memberFound->issued_count * sizeof(int)); // Registra la reasignación
-        memberFound->issued_books[memberFound->issued_count - 1] = bookID; // Agrega el libro a la lista del miembro
+        memberFound->issued_books = realloc(memberFound->issued_books, memberFound->issued_count * sizeof(int));
+        incrementHeapAllocations(memberFound->issued_books, memberFound->issued_count * sizeof(int));
+        memberFound->issued_books[memberFound->issued_count - 1] = bookID;
     }
 }
 ````
@@ -228,15 +223,13 @@ void issueBook(book_t *library, member_t *members) {
 Esta funcion permite regresar un libro que ha sido prestado, aumenta la cantidad disponible de este libro y se actualiza la lista de libros prestados al miembro.
 ````c
 void returnBook(book_t *library, member_t *members) {
-    // Busca el libro y el miembro...
     if (bookFound && memberFound) {
         for (int i = 0; i < memberFound->issued_count; i++) {
             if (memberFound->issued_books[i] == bookID) {
-                // Elimina el libro de la lista del miembro
                 memberFound->issued_count--;
-                memberFound->issued_books = realloc(memberFound->issued_books, memberFound->issued_count * sizeof(int)); // Reasigna memoria
-                incrementHeapAllocations(memberFound->issued_books, memberFound->issued_count * sizeof(int)); // Registra la reasignación
-                bookFound->quantity++; // Aumenta la cantidad del libro
+                memberFound->issued_books = realloc(memberFound->issued_books, memberFound->issued_count * sizeof(int));
+                incrementHeapAllocations(memberFound->issued_books, memberFound->issued_count * sizeof(int));
+                bookFound->quantity++;
                 break;
             }
         }
@@ -250,8 +243,8 @@ void freeLibrary(book_t *library) {
     book_t *current = library;
     while (current) {
         book_t *next = current->next;
-        incrementHeapDeallocations(current); // Registra la liberación
-        free(current); // Libera la memoria
+        incrementHeapDeallocations(current);
+        free(current);
         current = next;
     }
 }
@@ -260,10 +253,10 @@ void freeMembers(member_t *members) {
     member_t *current = members;
     while (current) {
         member_t *next = current->next;
-        incrementHeapDeallocations(current->issued_books); // Registra la liberación
-        free(current->issued_books); // Libera la memoria de los libros prestados
-        incrementHeapDeallocations(current); // Registra la liberación
-        free(current); // Libera la memoria del miembro
+        incrementHeapDeallocations(current->issued_books);
+        free(current->issued_books);
+        incrementHeapDeallocations(current); 
+        free(current); 
         current = next;
     }
 }
@@ -284,9 +277,8 @@ void saveLibraryToFile(book_t *library, const char *filename) {
 void loadLibraryFromFile(book_t **library, int *bookCount, const char *filename) {
     FILE *file = fopen(filename, "r");
     while (!feof(file)) {
-        book_t *new_book = (book_t *)malloc(sizeof(book_t)); // Asignación en el heap
-        incrementHeapAllocations(new_book, sizeof(book_t)); // Registra la asignación
-        // Lógica para cargar datos del libro...
+        book_t *new_book = (book_t *)malloc(sizeof(book_t));
+        incrementHeapAllocations(new_book, sizeof(book_t));
         new_book->next = *library;
         *library = new_book;
         (*bookCount)++;
