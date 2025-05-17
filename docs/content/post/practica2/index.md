@@ -5,15 +5,12 @@ title = 'Práctica 2'
 +++
 
 ## Introducción
-## Este proyecto consiste en una aplicación web para la gestión de una biblioteca, implementada utilizando Flask para crear una API REST. La aplicación permite realizar operaciones CRUD (Crear, Leer, Actualizar, Eliminar) sobre libros y miembros de la biblioteca, así como gestionar préstamos y devoluciones de libros. Además, incluye un módulo de gestión de memoria para monitorear el uso de memoria durante la ejecución.
+Este proyecto es un sistema de biblioteca digital que hice usando Python y Flask (un framework para crear páginas web). Básicamente, es una aplicación web donde puedes: agregar libros (normales o digitales), registrar miembros de la biblioteca, prestar y devolver libros, guardar toda la información en archivos para que no se pierda. Además, tiene un sistema de monitoreo de memoria para ver cuánta memoria está usando el programa.
 
 ### API REST con Flask (biblioteca.py)
-
-Este archivo define la aplicación web utilizando Flask. Configura rutas para manejar solicitudes HTTP y realiza operaciones como agregar libros, listar miembros, prestar libros, etc.
-Cada ruta (/books, /members, /issue_book, etc.) maneja una operación específica y devuelve respuestas en formato JSON. Los datos se guardan y cargan desde archivos JSON (library.json y members.json) después de cada operación relevante. Se llama a memory_management.display_memory_usage() para monitorear el uso de memoria después de operaciones críticas.
+En este archivo es donde se manejan las acciones que se van a realizar desde el navegador. Se muestran los libros, se puede agregar un nuevo miembro, existe un guardado automático cada que se hace un cambio en los libros.
 
 #### Agregar un libro.
-
 ```python
 @app.route('/books', methods=['POST'])
 def add_book():
