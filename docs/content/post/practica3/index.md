@@ -30,7 +30,7 @@ La aplicación básicamente nos sirve para listar tareas desde la terminal, pode
 * Con el comando 'q' salimos. 
 
 ### Conclusión.
-Esta app es muy simple pero muy útil para poder gestionar las tareas que podamos tener, todo esto gracias a Haskell y al paradigma funcional.
+Esta app es muy simple pero muy útil para poder gestionar nuestras tareas dentro de un programa, todo esto gracias a Haskell y al paradigma funcional.
 
 [Mi Respositorio](https://github.com/Jesus292005/Portafolio_Paradigmas.git "REPOSITORIO")
 
