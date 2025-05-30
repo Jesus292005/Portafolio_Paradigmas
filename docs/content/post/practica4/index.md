@@ -223,7 +223,7 @@ Prolog representa el paradigma lógico mediante hechos y reglas que describen re
 
 [Mi Respositorio](https://github.com/Jesus292005/Portafolio_Paradigmas.git "REPOSITORIO")
 
-[Practica3](https://jesus292005.github.io/Portafolio_Paradigmas/post/practica4/)
+[Practica4](https://jesus292005.github.io/Portafolio_Paradigmas/post/practica4/)
 
 
 
