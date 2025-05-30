@@ -213,7 +213,7 @@ count_to_10(X):-
     Y is X + 1,
     count_to_10(Y).
 ```
-Para este programa, lo que podemos hacer es darle un numero menor a 10 y este nos mostrará recursivamente el paso uno a uno hasta llegar a 10.
+Para este programa, lo que podemos hacer es darle un número menor a 10 y este nos mostrará recursivamente el paso uno a uno hasta llegar a 10.
 
 
 ### Conclusión
